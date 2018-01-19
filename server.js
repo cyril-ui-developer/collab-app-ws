@@ -73,7 +73,7 @@ app.post('/posts', (req,res)=>{
 })
 
 // get posts by category id
-app.post('/postss', async (req, res) => {
+app.post('/posts', async (req, res) => {
     try{
          const posts = await Post.find(req.body, '-__v')
          res.send(posts);
