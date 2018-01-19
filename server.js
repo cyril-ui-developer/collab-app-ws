@@ -72,6 +72,17 @@ app.post('/posts', (req,res)=>{
     }
 })
 
+// get posts by category id
+app.post('/postss', async (req, res) => {
+    try{
+         const posts = await Post.find(req.body, '-__v')
+         res.send(posts);
+         console.log(posts)
+     }catch(e){
+         console.log(e)
+         res.sendStatus(500)
+     }
+})
   mongoose.connect('mongodb://test:test@ds259117.mlab.com:59117/collab_db',(err) =>{
     if(!err){
         console.log('Connected to Mongo')
