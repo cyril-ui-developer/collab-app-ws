@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express()
 
 const Category = require('./models/Category.js');
@@ -13,6 +14,7 @@ const categories  =[
 ]
 
 // middleware
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
