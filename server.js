@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express()
 
 const Category = require('./models/Category.js');
+const Post = require('./models/Post.js');
 
 mongoose.Promise = Promise;
 
@@ -49,6 +50,27 @@ app.post('/categories', (req,res)=>{
     })
 })
 
+//associating post to category
+app.post('/posts', (req,res)=>{
+    try{
+    const postData = req.body
+    postData.createdDate =  new Date();
+    const post = new Post(postData)
+     console.log(post)
+
+    post.save((err, result) =>{
+        if(err){
+            console.error("posting error")
+            return res.status(500).send({massage:"posting error"})
+        }
+     
+        res.status(200).send({message:"Saved Post Successfully!"})
+        
+    })} catch(error){
+        console.error(error)
+        res.sendStatus(500)
+    }
+})
 
   mongoose.connect('mongodb://test:test@ds259117.mlab.com:59117/collab_db',(err) =>{
     if(!err){
