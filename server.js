@@ -51,7 +51,7 @@ app.post('/categories', (req,res)=>{
 })
 
 //associating post to category
-app.post('/posts', (req,res)=>{
+app.post('/post', (req,res)=>{
     try{
     const postData = req.body
     postData.createdDate =  new Date();
@@ -83,6 +83,12 @@ app.post('/posts', async (req, res) => {
          res.sendStatus(500)
      }
 })
+
+// define a fall through route
+app.use((req,res)=>{
+    res.sendStatus(404);
+})
+
   mongoose.connect('mongodb://test:test@ds259117.mlab.com:59117/collab_db',(err) =>{
     if(!err){
         console.log('Connected to Mongo')
